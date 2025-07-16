@@ -5,8 +5,11 @@ import com.free.DSCommerce.entities.Product;
 import com.free.DSCommerce.repositories.ProductRepository;
 import com.free.DSCommerce.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -19,6 +22,11 @@ public class ProductController {
     @GetMapping(value = "/{id}")
     public ProductDTO findById(@PathVariable Long id) {
         return productService.findByid(id);
+    }
+
+    @GetMapping
+    public Page<ProductDTO> findAll(Pageable pageable) {
+        return productService.findAll(pageable);
     }
 
 }
