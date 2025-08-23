@@ -1,7 +1,13 @@
 package com.free.DSCommerce.dto;
 
 import com.free.DSCommerce.entities.Product;
+import lombok.Builder;
+import lombok.Getter;
 
+import java.util.Objects;
+
+@Builder
+@Getter
 public class ProductDTO
 {
     private Long id;
@@ -29,23 +35,21 @@ public class ProductDTO
         this.imgUrl = product.getImgUrl();
     }
 
-    public Long getId() {
-        return id;
+    public Product toEntity() {
+        return Product.builder()
+                .name(this.name)
+                .description(this.description)
+                .price(this.price)
+                .imgUrl(this.imgUrl)
+                .build();
     }
 
-    public String getName() {
-        return name;
+    public Product toEntity(Product product) {
+        product.setName(this.name);
+        product.setDescription(this.description);
+        product.setPrice(this.price);
+        product.setImgUrl(this.imgUrl);
+        return product;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
 }
