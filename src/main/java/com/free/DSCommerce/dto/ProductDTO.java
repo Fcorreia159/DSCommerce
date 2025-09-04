@@ -1,6 +1,7 @@
 package com.free.DSCommerce.dto;
 
 import com.free.DSCommerce.entities.Product;
+import jakarta.validation.constraints.*;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -11,8 +12,16 @@ import java.util.Objects;
 public class ProductDTO
 {
     private Long id;
+
+    @Size(min = 3, max = 80, message = "O nome deve ter entre 3 e 80 caracteres")
+    @NotBlank(message = "Campo requerido")
     private String name;
+
+    @Size(min = 10, message = "A descrição deve ter no mínimo 10 caracteres")
+    @NotBlank(message = "Campo requerido")
     private String description;
+
+    @Positive(message = "O preço deve ser um valor positivo")
     private Double price;
     private String imgUrl;
 
